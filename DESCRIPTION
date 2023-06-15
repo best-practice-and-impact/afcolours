@@ -1,0 +1,10 @@
+Package: afcolours
+Title: Government Analysis Function Recommended Accessible Colour Palette
+Version: 0.0.0.9000
+Authors@R: 
+    person("Charlotte", "Rowley", , "Charlotte.Rowley@ons.gov.uk", role = c("aut", "cre"))
+Description: Government Analysis Function recommended colours for use in charts on gov.uk to help meet accessibility guidance.
+License: `use_mit_license()`, `use_gpl3_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
