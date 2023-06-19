@@ -8,22 +8,30 @@
 #' @param n Number of colours to return, required for categorical palette type.
 #'   If omitted from other palette types, uses all colours.
 #' @param code Type of colour code to return. Choices are:
-#'   \code{hex}, \code{rgb}, \code{cymk}
+#'   \code{hex}, \code{rgb}, \code{names}
 #'   If omitted, returns hex code
-#' @return A vector of colours.
+#' @return A vector of colours
 #' @import
 #'   dplyr
 #' @export
 #' @keywords colours
+#' @example   ggplot(aes(x = x, y = y, colour = z)) +
+#'            geom_point() +
+#'            scale_colour_manual(values = af_colours("duo"))
 
 af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), n, code = "hex") {
 
   type <- match.arg(type)
 
-  palette <- palette_picker(type, code)
+  palette <- palette_picker(type, tolower(code))
 
-  if (type == "categorical" && missing(n))
+  if (type == "categorical" && missing(n)){
     stop("Number of colours (n) is required for categorical palette")
+  }
+
+  if (type == "categorical" && n == 2){
+    palette <- palette_picker("duo", tolower(code))
+  }
 
   if (missing(n)) {
     n <- length(palette)
@@ -37,7 +45,9 @@ af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), n,
     message("Line charts using more than two colours may not be accessible to all users")
   }
 
+
   palette[1:n]
 
 }
+
 
