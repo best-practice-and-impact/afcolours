@@ -1,3 +1,12 @@
+#' List of colour codes in the 'categorical' colour palette
+#'
+#' @param code type of colour code required. Choices are:
+#'   \code{hex}, \code{rgb}, \code{cymk}, \names{names}
+#'
+#' @return vector of the required type of colour code  from the categorical palette
+#'
+#' @example categorical_colours(code = "hex")
+
 categorical_colours <- function(code = c("hex", "rgb", "cymk", "names")) {
 
   code <- match.arg(code)

@@ -2,7 +2,7 @@
 #'
 #' Returns selected colour palette as a vector of the selected code type (hex/rgb/cymk).
 #'
-#' @param type Name of desired palette. Choices are:
+#' @param type Name of required palette. Choices are:
 #'   \code{categorical}, \code{duo},  \code{sequential},
 #'   \code{focus}
 #' @param n Number of colours to return, required for categorical palette type.

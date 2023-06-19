@@ -1,8 +1,17 @@
-focus_colours <- function(code = c("hex", "rgb", "cymk", "names")) {
+#' List of colour codes in the 'focus' colour palette
+#'
+#' @param code type of colour code required. Choices are:
+#'   \code{hex}, \code{rgb}, \code{cymk}, \names{names}
+#'
+#' @return vector of the required type of colour code  from the focus palette
+#'
+#' @example focus_colours(code = "hex")
+
+ focus_colours <- function(code = c("hex", "rgb", "cymk", "names")) {
 
   code <- match.arg(code)
 
-  focus <- list(
+  colours <- list(
 
     names = c("dark_blue", "grey"),
 
@@ -17,5 +26,3 @@ focus_colours <- function(code = c("hex", "rgb", "cymk", "names")) {
 colours[[code]]
 
 }
-
-focus_colours("rgb")
