@@ -24,8 +24,6 @@ palette_picker <- function(type, code = "hex") {
 
     )
 
-
-
     palette_list[[type]]
 
 

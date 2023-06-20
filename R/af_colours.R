@@ -1,6 +1,6 @@
 #' Analysis Function colour palette function
 #'
-#' Returns selected colour palette as a vector of the selected code type (hex/rgb/cymk).
+#' Generate a colour palette based on the selected chart and code type (hex/rgb/names).
 #'
 #' @param type Name of required palette. Choices are:
 #'   \code{categorical}, \code{duo},  \code{sequential},
@@ -10,7 +10,7 @@
 #' @param code Type of colour code to return. Choices are:
 #'   \code{hex}, \code{rgb}, \code{names}
 #'   If omitted, returns hex code
-#' @return A vector of colours
+#' @return A vector of colour codes
 #' @import
 #'   dplyr
 #' @export
