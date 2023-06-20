@@ -11,16 +11,19 @@
 
   code <- match.arg(code)
 
-  colours <- list(
+  colours <- lst(
 
     names = c("dark_blue", "grey"),
 
     hex = c("#12436D", "#BFBFBF"),
 
-    rgb = c("(18, 67, 109)", "(191, 191, 191)")
+    rgb = t(col2rgb(hex))
 
     )
 
-colours[[code]]
+
+  colours[[code]]
 
 }
+
+

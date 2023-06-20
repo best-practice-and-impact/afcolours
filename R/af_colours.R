@@ -33,20 +33,24 @@ af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), n,
     palette <- palette_picker("duo", tolower(code))
   }
 
-  if (missing(n)) {
+  if (missing(n) && code == "rgb"){
+    n <- nrow(palette)
+  }
+    else
+      if (missing(n)){
     n <- length(palette)
   }
 
-  if (n > length(palette)) {
+  if (n > length(palette)){
     stop("Not enough colours in this palette")
   }
 
-  if (n > 2) {
+  if (n > 2){
     message("Line charts using more than two colours may not be accessible to all users")
   }
 
 
-  palette[1:n]
+  head(palette, n)
 
 }
 

@@ -15,7 +15,7 @@ test_that("n gives the correct number of colours", {
 })
 
 test_that("function is returning the correct code type", {
-  expect_equal(af_colours("duo", code = "rgb"), c("(18, 67, 109)", "(244, 106, 37)"))
+  expect_equivalent(af_colours("duo", code = "rgb"), rbind(c(18, 67, 109), c(244, 106, 37)))
   expect_equal(af_colours("focus", code = "names"), c("dark_blue", "grey"))
 })
 
