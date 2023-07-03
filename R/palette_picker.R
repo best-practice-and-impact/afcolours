@@ -3,29 +3,28 @@
 #' Used in the af_colours function. Returns a vector of the required colour codes from the palette selected in the input "type"
 #'
 #' @param type type of palette required (categorical, duo, sequential, focus)
-#' @param code type of colour code required (hex, rgb, names), default is hex
+#' @param colour_format type of colour format required (hex, rgb, names), default is hex
 #'
 #' @return vector of the required type of colour code  from the required palette
 #'
 #' @example palette_picker(type = "categorical", code = "rgb")
 
 
-palette_picker <- function(type, code = "hex") {
+palette_picker <- function(type, colour_format = "hex") {
 
-    palette_list <- list(
+  palette_list <- list(
 
-      `categorical` = categorical_colours(code),
+    `categorical` = categorical_colours(colour_format),
 
-      `duo` = duo_colours(code),
+    `duo` = duo_colours(colour_format),
 
-      `sequential` = sequential_colours(code),
+    `sequential` = sequential_colours(colour_format),
 
-      `focus` = focus_colours(code)
+    `focus` = focus_colours(colour_format)
 
-    )
+  )
 
-    palette_list[[type]]
-
+  palette_list[[type]]
 
 }
 
