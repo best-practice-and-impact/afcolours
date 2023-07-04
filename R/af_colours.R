@@ -1,12 +1,12 @@
 #' Analysis Function colour palette function
 #'
-#' Generate a colour palette based on the selected chart and colour_format type (hex/rgb/names).
+#' Generate a colour palette based on the selected chart and colour_format type (hex/rgb).
 #'
 #' @param type Name of required palette. Choices are:
 #'   \code{categorical}, \code{duo},  \code{sequential},
 #'   \code{focus}
 #' @param colour_format Type of colour code to return. Choices are:
-#'   \code{hex}, \code{rgb}, \code{names}
+#'   \code{hex}, \code{rgb}
 #'   If omitted, returns hex code
 #' @param n Number of colours to return for categorical palette type (max 6).
 #'   If omitted, uses all colours.
@@ -45,6 +45,10 @@ af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), co
 
   palette <- palette_picker(type, tolower(colour_format))
 
+  if (type != "categorical"){
+    n <- length(palette)
+  }
+
   if (n > length(palette)){
     message("Warning: list of colours returned is shorter than number of colours requested. Consult guidance to ensure correct palette chosen.")
   }
@@ -53,12 +57,8 @@ af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), co
     message("Warning: list of colours returned is longer than number of colours requested. Consult guidance to ensure correct palette chosen.")
   }
 
-  if (type != "categorical"){
-    n <- length(palette)
-  }
-
-  if (n > 2){
-    message("Line charts using more than two colours may not be accessible to all users")
+  if (n > 4){
+    message("Line charts using more than 4 colours may not be accessible to all users.")
   }
 
   head(palette, n)

@@ -1,19 +1,17 @@
 #' List of colour codes in the 'duo' colour palette
 #'
 #' @param code type of colour code required. Choices are:
-#'   \code{hex}, \code{rgb}, \names{names}
+#'   \code{hex}, \code{rgb}
 #'
 #' @return vector of the required type of colour code  from the duo palette
 #'
 #' @example duo_colours(code = "hex")
 
-duo_colours <- function(code = c("hex", "rgb", "names")) {
+duo_colours <- function(code = c("hex", "rgb")) {
 
   code <- match.arg(code)
 
   colours <- lst(
-
-    names = c("dark_blue", "orange"),
 
     hex = c("#12436D", "#F46A25"),
 

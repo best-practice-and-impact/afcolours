@@ -1,19 +1,17 @@
 #' List of colour codes in the 'sequential' colour palette
 #'
 #' @param code type of colour code required. Choices are:
-#'   \code{hex}, \code{rgb}, \names{names}
+#'   \code{hex}, \code{rgb}
 #'
 #' @return vector of the required type of colour code  from the sequential palette
 #'
 #' @example sequential_colours(code = "hex")
 
-sequential_colours <- function(code = c("hex", "rgb", "names")) {
+sequential_colours <- function(code = c("hex", "rgb")) {
 
   code <- match.arg(code)
 
   colours <- lst(
-
-    names = c("dark_blue", "mid_blue", "light_blue"),
 
     hex = c("#12436D", "#2073BC", "#6BACE6"),
 

@@ -3,7 +3,7 @@
 #' Used in the af_colours function. Returns a vector of the required colour codes from the palette selected in the input "type"
 #'
 #' @param type type of palette required (categorical, duo, sequential, focus)
-#' @param colour_format type of colour format required (hex, rgb, names), default is hex
+#' @param colour_format type of colour format required (hex, rgb), default is hex
 #'
 #' @return vector of the required type of colour code  from the required palette
 #'
