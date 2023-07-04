@@ -7,5 +7,5 @@ test_that("palette_picker function works with palette types", {
 
 test_that("palette_picker function is returning the correct colour format", {
   expect_equal(c(palette_picker("duo", colour_format = "rgb")), c(18, 244, 67, 106, 109, 37))
-  expect_equal(palette_picker("focus", colour_format = "names"), c("dark_blue", "grey"))
+  expect_equal(palette_picker("focus"), c("#12436D", "#BFBFBF"))
 })
