@@ -10,6 +10,10 @@ test_that("user must choose at maximum 6 colours for the categorical palette", {
   expect_error(af_colours("categorical", n=7), "The number of colours (n) must not be more than 6 for the categorical palette.", fixed = TRUE)
 })
 
+test_that("user must choose at minimum 1 colour for the categorical palette", {
+  expect_error(af_colours("categorical", n=0), "The number of colours (n) must be more than 0 for the categorical palette.", fixed = TRUE)
+})
+
 test_that("n gives the correct number of colours", {
   expect_equal(length(af_colours("categorical", n=4)), 4)
   expect_equal(length(af_colours("sequential", n=3)), 3)
