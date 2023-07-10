@@ -1,0 +1,574 @@
+---
+title: "afcolours"
+format: html
+---
+
+<style>
+table, th, td {
+  border-bottom: 1px solid grey;
+  border-collapse: collapse;
+  padding: 6px
+}
+</style>
+
+```{R}
+#| include: false
+
+library("dplyr")
+library("tidyverse")
+```
+
+## Table of Contents
+
+[Requirements](#requirements)
+
+[Installing af_colours](#installingafcolours)
+
+[How to obtain the colours](#howtoobtain)
+
+[Application](#application)
+
+[Maintenance](#maintenance)
+
+## Requirements<a name="requirements"></a>
+To run afcolours, your system requires the following installations:
+
+1. R.
+2. The [afcolours package](https://github.com/best-practice-and-impact/afcolours).
+
+
+## Installing afcolours<a name="installingafcolours"></a>
+This package is not currently on artifactory, so to install the latest version of afcolours  directly from the github page, run:
+
+```{R}
+devtools::install_github("best-practice-and-impact/afcolours")
+```
+
+This requires you to have the "devtools" package installed first.
+
+## How to obtain colours<a name="howtoobtain"></a>
+In your R environment, import the afcolours package:
+
+```{R}
+library("afcolours")
+```
+
+The afcolours function takes three arguments: palette, colour_format, 
+and n.
+
+- palette is an optional parameter, chosen by the user based on the 
+[Analysis Function colour guidance](https://analysisfunction.civilservice.gov.uk/policy-store/codes-for-accessible-colours/#section-5).
+It takes one of four possible string values corresponding to the options:
+    - "categorical" (default)
+    - "duo"  
+    - "focus"   
+    - "sequential"  
+ 
+- colour_format is an optional parameter. It takes one of two possible string values:
+    - "hex" (default); meaning hexadecimal colour code, for example #12436D.
+    - "rgb"; meaning red green blue colour code, for example (18, 67, 109).
+
+- n is an optional parameter for the categorical palette. It takes an integer value up to 6 (default n=6).
+
+afcolours returns hex codes as a vector, and rgb codes as a matrix.
+
+## Basic Examples
+
+For example, to return the duo colour palette hex codes:
+```{R}
+afcolours::af_colours("duo")
+
+```
+
+<br>
+
+To return a five colour categorical palette as rgb codes:
+```{R}
+afcolours::af_colours("categorical", "rgb", 5)
+```
+
+<br>
+
+See also that a warning is given for colours lists greater than four to let the user know that accessibility problems can arise if the 
+palette is not applied correctly.
+
+
+## Application<a name="application"></a>
+### Duo
+
+<table style="width:80%">
+  <tr>
+    <th style="background-color: #D9EDF7">Colour name </th>
+    <th style="background-color: #D9EDF7">Hex code </th>
+    <th style="background-color: #D9EDF7">RGB code </th>
+    <th style="background-color: #D9EDF7">Colour fill </th>
+  </tr>
+  <tr>
+    <td>Dark blue </td>
+    <td>#12436D </td>
+    <td>(18, 67, 109) </td>
+    <td style="background-color: #12436D; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Orange </td>
+    <td>#F46A25 </td>
+    <td>(244, 106, 37) </td>
+    <td style="background-color: #F46A25; border-bottom: 1px solid white"></td>    
+  </tr>
+</table>
+
+<br>
+
+#### Figure 1: Line chart using the Duo colour palette
+
+```{R}
+#| echo: false
+#| warning: false
+
+#Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_duo_colours <- afcolours::af_colours("duo")
+
+# Load in your data
+world_population <- read_csv("data/world_population_in_billions.csv")
+
+two_series_data <- world_population[1:2,] %>% 
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country)
+
+# Create your chart
+ggplot(two_series_data, aes(x = Year, y = Population,
+                            colour = Country,
+                            group = Country)) +
+  geom_line(size=1.1) +
+  labs(x="Year", y="Population (Billion)") +
+  scale_colour_manual(values=af_duo_colours) +
+  theme_ipsum()
+
+```
+
+<br>
+
+This line chart uses data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>.
+Data is available with the afcolours package.
+
+```{R}
+#| eval: false
+
+#Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_duo_colours <- afcolours::af_colours("duo")
+
+# Load in your data
+world_population <- read_csv("data/world_population_in_billions.csv")
+
+two_series_data <- world_population[1:2,] %>% 
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country)
+
+# Create your chart
+ggplot(two_series_data, aes(x = Year, y = Population,
+                            colour = Country,
+                            group = Country)) +
+  geom_line(size=1.1) +
+  labs(x="Year", y="Population (Billion)") +
+  scale_colour_manual(values=af_duo_colours) +
+  theme_ipsum()
+
+```
+
+<br>
+
+
+### Focus
+
+<table style="width:80%">
+  <tr>
+    <th style="background-color: #D9EDF7">Colour name </th>
+    <th style="background-color: #D9EDF7">Hex code </th>
+    <th style="background-color: #D9EDF7">RGB code </th>
+    <th style="background-color: #D9EDF7">Colour fill </th>
+  </tr>
+  <tr>
+    <td>Dark blue </td>
+    <td>#12436D </td>
+    <td>(18, 67, 109) </td>
+    <td style="background-color: #12436D; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Grey </td>
+    <td>#BFBFBF </td>
+    <td>(191, 191, 191) </td>
+    <td style="background-color: #BFBFBF; border-bottom: 1px solid white"></td>    
+  </tr>
+</table>
+
+<br>
+
+#### Figure 2: Line chart using the Focus colour palette
+
+```{R}
+#| echo: false
+#| warning: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_focus_colours <- afcolours::af_colours("focus")
+
+# Load in your data
+world_population <- read_csv("data/world_population_in_billions.csv")
+
+focus_data <- world_population[1:5,] %>% 
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country) %>%
+  mutate(highlight = ifelse(Country == "India", "India", "Other"))
+
+# Create your chart
+ggplot(focus_data, aes(x = Year, y = Population,
+                       group = Country,
+                       colour = highlight,
+                       size = highlight)) +
+  geom_line() +
+  labs(x="Year", y="Population (Billion)") +
+  scale_colour_manual(values=af_focus_colours,
+                      guide="none") +
+  scale_size_manual(values=c(1.1, 0.6),
+                    name="Country") +
+  theme_ipsum()
+
+```
+
+<br>
+
+This line chart uses data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. 
+Data is available with the afcolours package.
+
+```{R}
+#| eval: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_focus_colours <- afcolours::af_colours("focus")
+
+# Load in your data
+world_population <- read_csv("data/world_population_in_billions.csv")
+
+focus_data <- world_population[1:5,] %>% 
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country) %>%
+  mutate(highlight = ifelse(Country == "India", "India", "Other"))
+
+# Create your chart
+ggplot(focus_data, aes(x = Year, y = Population,
+                       group = Country,
+                       colour = highlight,
+                       size = highlight)) +
+  geom_line() +
+  labs(x="Year", y="Population (Billion)") +
+  scale_colour_manual(values=af_focus_colours,
+                      guide="none") +
+  scale_size_manual(values=c(1.1, 0.6),
+                    name="Country") +
+  theme_ipsum()
+
+```
+
+<br>
+
+
+### Sequential
+
+<table style="width:80%">
+  <tr>
+    <th style="background-color: #D9EDF7">Colour name </th>
+    <th style="background-color: #D9EDF7">Hex code </th>
+    <th style="background-color: #D9EDF7">RGB code </th>
+    <th style="background-color: #D9EDF7">Colour fill </th>
+  </tr>
+  <tr>
+    <td>Dark blue </td>
+    <td>#12436D </td>
+    <td>(18, 67, 109) </td>
+    <td style="background-color: #12436D; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Mid blue </td>
+    <td>#2073BC </td>
+    <td>(32, 115, 188) </td>
+    <td style="background-color: #2073BC; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Light blue </td>
+    <td>#6BACE6 </td>
+    <td>(107, 172, 230) </td>
+    <td style="background-color: #6BACE6; border-bottom: 1px solid white"></td>    
+  </tr>
+</table>
+
+<br>
+
+
+#### Figure 3: Bar chart using the Sequential colour palette
+
+```{R}
+#| echo: false
+#| warning: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_sequential_colours <- afcolours::af_colours("sequential", colour_format = "rgb")
+
+# Load in your data
+world_population_by_age <- read_csv("data/population_by_age.csv")
+
+top_five_age <- world_population_by_age[1:5,] %>% 
+  tidyr::gather(Age, Population, -Country)
+
+# Create your chart
+ggplot(top_five_age, aes(x = Country, y = Population, fill = Age)) +
+  geom_col(width=0.6, position=position_dodge(0.7), stat="identity",
+           colour=rgb(af_sequential_colours, maxColorValue = 255)[1]) +
+  labs(x="", y="Population (Billion)") +
+  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255)) +
+  theme_ipsum()
+
+```
+
+<br>
+
+This bar chart uses data based on the <a href="https://www.kaggle.com/datasets/elmoallistair/population-by-age-group-2021">population by age dataset</a>.
+Data is available with the afcolours package.
+
+Distinct from previous examples, this section features how to use the rgb list returned by afcolours. It is generally easier to use hex codes, 
+but this example is included for completeness. The end result is the same.
+
+The spacing in this example is to account for the bar borders, which are required for accessibility purposes.
+
+```{R}
+#| eval: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_sequential_colours <- afcolours::af_colours("sequential", colour_format = "rgb")
+
+# Load in your data
+world_population_by_age <- read_csv("data/population_by_age.csv")
+
+top_five_age <- world_population_by_age[1:5,] %>% 
+  tidyr::gather(Age, Population, -Country)
+
+# Create your chart
+ggplot(top_five_age, aes(x = Country, y = Population, fill = Age)) +
+  geom_col(width=0.6, position=position_dodge(0.7), stat="identity",
+           colour=rgb(af_sequential_colours, maxColorValue = 255)[1]) +
+  labs(x="", y="Population (Billion)") +
+  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255)) +
+  theme_ipsum()
+
+```
+
+<br>
+
+### Categorical
+
+<table style="width:80%">
+  <tr>
+    <th style="background-color: #D9EDF7">Colour name </th>
+    <th style="background-color: #D9EDF7">Hex code </th>
+    <th style="background-color: #D9EDF7">RGB code </th>
+    <th style="background-color: #D9EDF7">Colour fill </th>
+  </tr>
+  <tr>
+    <td>Dark blue </td>
+    <td>#12436D </td>
+    <td>(18, 67, 109) </td>
+    <td style="background-color: #12436D; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Turquoise </td>
+    <td>#28A197 </td>
+    <td>(40, 161, 151) </td>
+    <td style="background-color: #28A197; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Dark pink </td>
+    <td>#801650 </td>
+    <td>(128, 22, 80) </td>
+    <td style="background-color: #801650; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Orange </td>
+    <td>#F46A25 </td>
+    <td>(244, 106, 37) </td>
+    <td style="background-color: #F46A25; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Dark grey </td>
+    <td>#3D3D3D </td>
+    <td>(61, 61, 61) </td>
+    <td style="background-color: #3D3D3D; border-bottom: 1px solid white"></td>    
+  </tr>
+  <tr>
+    <td>Light purple </td>
+    <td>#A285D1 </td>
+    <td>(162, 133, 209) </td>
+    <td style="background-color: #A285D1; border-bottom: 1px solid white"></td>    
+  </tr>
+</table>
+
+<br>
+
+The following charts use data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. 
+Data is available with the afcolours package.
+
+#### Figure 4: Bar chart using the Categorical colour palette
+
+```{R}
+#| echo: false
+#| warning: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
+
+# Load in your data
+world_population <- read_csv("data/world_population_continents.csv")
+
+continents_population <- world_population %>%
+  select(2:6) %>%
+  tidyr::gather(Year, Population, -Continent) %>%
+  group_by(Continent, Year) %>%
+  summarise_each(funs(sum)) %>%
+  mutate(Population = Population/10^9)
+
+# Create your chart
+ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
+  geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
+  labs(x="Year", y="Population (Billion)") +
+  scale_fill_manual(values=af_categorical_colours) +
+  theme_ipsum()
+
+```
+
+```{R}
+#| eval: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
+# Load in your colours
+af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
+
+# Load in your data
+world_population <- read_csv("data/world_population_continents.csv")
+
+continents_population <- world_population %>%
+  select(2:6) %>%
+  tidyr::gather(Year, Population, -Continent) %>%
+  group_by(Continent, Year) %>%
+  summarise_each(funs(sum)) %>%
+  mutate(Population = Population/10^9)
+
+# Create your chart
+ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
+  geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
+  labs(x="Year", y="Population (Billion)") +
+  scale_fill_manual(values=af_categorical_colours) +
+  theme_ipsum()
+
+```
+
+<br>
+
+#### Figure 5: Pie chart using the Categorical colour palette
+
+```{R}
+#| echo: false
+#| warning: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+
+# Load in your colours
+af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
+
+# Load in your data
+world_population <- read_csv("data/world_population_continents.csv")
+
+continents_population <- world_population %>%
+  select(Continent, "2022") %>%
+  group_by(Continent) %>%
+  summarise(Population = sum(.data$"2022")) %>%
+  mutate(Label = paste(Continent, 
+                       paste0(round(Population/sum(Population)*100, 2), "%"), 
+                       sep=" "))
+
+# Create your chart
+pie(continents_population$Population, labels = continents_population$Label, 
+    border="white", col=af_categorical_colours, radius = 1.05)
+
+```
+
+```{R}
+#| eval: false
+
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+
+# Load in your colours
+af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
+
+# Load in your data
+world_population <- read_csv("data/world_population_continents.csv")
+
+continents_population <- world_population %>%
+  select(Continent, "2022") %>%
+  group_by(Continent) %>%
+  summarise(Population = sum(.data$"2022")) %>%
+  mutate(Label = paste(Continent, 
+                       paste0(round(Population/sum(Population)*100, 2), "%"), 
+                       sep=" "))
+
+# Create your chart
+pie(continents_population$Population, labels = continents_population$Label, 
+    border="white", col=af_categorical_colours, radius = 1.05)
+
+```
+
+<br>
+
+## Maintenance<a name="maintenance"></a>
+The package uses the col2rgb function for generating the rgb color codes.
+In the event the Analysis Function colour palettes change, only the hex codes need be updated.

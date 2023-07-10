@@ -4,12 +4,12 @@
 \alias{palette_picker}
 \title{Palette selection and return}
 \usage{
-palette_picker(type, code = "hex")
+palette_picker(type, colour_format = "hex")
 }
 \arguments{
 \item{type}{type of palette required (categorical, duo, sequential, focus)}
 
-\item{code}{type of colour code required (hex, rgb, cymk, names), default is hex}
+\item{colour_format}{type of colour format required (hex, rgb), default is hex}
 }
 \value{
 vector of the required type of colour code  from the required palette

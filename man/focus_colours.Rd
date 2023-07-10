@@ -4,11 +4,11 @@
 \alias{focus_colours}
 \title{List of colour codes in the 'focus' colour palette}
 \usage{
-focus_colours(code = c("hex", "rgb", "cymk", "names"))
+focus_colours(code = c("hex", "rgb"))
 }
 \arguments{
 \item{code}{type of colour code required. Choices are:
-\code{hex}, \code{rgb}, \code{cymk}, \names{names}}
+\code{hex}, \code{rgb}}
 }
 \value{
 vector of the required type of colour code  from the focus palette

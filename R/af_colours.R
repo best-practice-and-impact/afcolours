@@ -2,7 +2,7 @@
 #'
 #' Generate a colour palette based on the selected chart and colour_format type (hex/rgb).
 #'
-#' @param type Name of required palette. Choices are:
+#' @param palette Name of required palette. Choices are:
 #'   \code{categorical}, \code{duo},  \code{sequential},
 #'   \code{focus}
 #' @param colour_format Type of colour code to return. Choices are:
@@ -15,18 +15,16 @@
 #'   dplyr
 #' @export
 #' @keywords colours
-#' @example   ggplot(aes(x = x, y = y, colour = z)) +
-#'            geom_point() +
-#'            scale_colour_manual(values = af_colours("duo"))
+#' @example ggplot(aes(x = x, y = y, colour = z)) + geom_point() + scale_colour_manual(values = af_colours("duo"))
 
-af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), colour_format = "hex", n = 6) {
+af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"), colour_format = "hex", n = 6) {
 
   tryCatch(
     expr = {
-      type <- match.arg(type)
+      palette <- match.arg(palette)
     },
     error = function(e){
-      stop(paste0(type, " is not an available palette option. Please select either 'categorical', 'duo', 'sequential', or 'focus'."))
+      stop(paste0(palette, " is not an available palette option. Please select either 'categorical', 'duo', 'sequential', or 'focus'."))
     }
   )
 
@@ -35,32 +33,35 @@ af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), co
   }
 
 
-  if (type == "categorical" && n > 6){
+  if (palette == "categorical" && n > 6){
     stop("The number of colours (n) must not be more than 6 for the categorical palette.")
   }
 
-  if (type == "categorical" && n == 2){
-    type  <- "duo"
+  if (palette == "categorical" && n <= 0){
+    stop("The number of colours (n) must be more than 0 for the categorical palette.")
   }
 
-  palette <- palette_picker(type, tolower(colour_format))
-
-  if (type != "categorical"){
-    n <- length(palette)
+  if (palette == "categorical" && n == 2){
+    palette  <- "duo"
   }
 
-  if (n > length(palette)){
-    message("Warning: list of colours returned is shorter than number of colours requested. Consult guidance to ensure correct palette chosen.")
-  }
+  p <- palette_picker(palette, tolower(colour_format))
 
-  if (n < length(palette)){
-    message("Warning: list of colours returned is longer than number of colours requested. Consult guidance to ensure correct palette chosen.")
+  palette_length <- ifelse(colour_format == "hex",
+                           length(p),
+                           nrow(p))
+
+  if (palette != "categorical"){
+    if (n != 6){
+      message("Warning: list of colours returned may be different than the colours requested. Consult guidance to ensure correct palette chosen.")
+    }
+    n <- palette_length
   }
 
   if (n > 4){
     message("Line charts using more than 4 colours may not be accessible to all users.")
   }
 
-  head(palette, n)
+  head(p, n)
 
 }

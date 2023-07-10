@@ -5,27 +5,27 @@
 \title{Analysis Function colour palette function}
 \usage{
 af_colours(
-  type = c("categorical", "duo", "sequential", "focus"),
-  n,
-  code = "hex"
+  palette = c("categorical", "duo", "sequential", "focus"),
+  colour_format = "hex",
+  n = 6
 )
 }
 \arguments{
-\item{type}{Name of required palette. Choices are:
+\item{palette}{Name of required palette. Choices are:
 \code{categorical}, \code{duo},  \code{sequential},
 \code{focus}}
 
-\item{n}{Number of colours to return, required for categorical palette type.
-If omitted from other palette types, uses all colours.}
-
-\item{code}{Type of colour code to return. Choices are:
-\code{hex}, \code{rgb}, \code{cymk}
+\item{colour_format}{Type of colour code to return. Choices are:
+\code{hex}, \code{rgb}
 If omitted, returns hex code}
+
+\item{n}{Number of colours to return for categorical palette type (max 6).
+If omitted, uses all colours.}
 }
 \value{
-A vector of colours.
+A vector of colour codes
 }
 \description{
-Returns selected colour palette as a vector of the selected code type (hex/rgb/cymk).
+Generate a colour palette based on the selected chart and colour_format type (hex/rgb).
 }
 \keyword{colours}
