@@ -242,8 +242,10 @@ ggplot(focus_data, aes(x = Year, y = Population,
                        size = highlight)) +
   geom_line() +
   labs(x="Year", y="Population (Billion)") +
-  scale_colour_manual(values=af_focus_colours) +
-  scale_size_manual(values=c(1.1, 0.2)) +
+  scale_colour_manual(values=af_focus_colours,
+                      guide="none") +
+  scale_size_manual(values=c(1.1, 0.6),
+                    name="Country") +
   theme_ipsum()
 
 ```
@@ -279,8 +281,10 @@ ggplot(focus_data, aes(x = Year, y = Population,
                        size = highlight)) +
   geom_line() +
   labs(x="Year", y="Population (Billion)") +
-  scale_colour_manual(values=af_focus_colours) +
-  scale_size_manual(values=c(1.1, 0.2)) +
+  scale_colour_manual(values=af_focus_colours,
+                      guide="none") +
+  scale_size_manual(values=c(1.1, 0.6),
+                    name="Country") +
   theme_ipsum()
 
 ```
@@ -515,7 +519,6 @@ ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
 # Load your packages
 library(tidyverse)
 library(ggplot2)
-library(ggrepel)
 
 # Load in your colours
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
@@ -528,27 +531,12 @@ continents_population <- world_population %>%
   group_by(Continent) %>%
   summarise(Population = sum(.data$"2022")) %>%
   mutate(Label = paste(Continent, 
-                       paste(round(((Population/sum(Population))*100), 2), "%"), 
+                       paste0(round(Population/sum(Population)*100, 2), "%"), 
                        sep=" "))
 
-# Get the positions of the labels
-continents_population_labels <- continents_population %>% 
-  mutate(csum = rev(cumsum(rev(Population))), 
-         pos = Population/2 + lead(csum, 1),
-         pos = if_else(is.na(pos), Population/2, pos))
-
 # Create your chart
-ggplot(continents_population, aes(x = "", y = Population, fill = Continent)) +
-  geom_col(width=1, color="white") +
-  coord_polar(theta = "y") +
-  scale_fill_manual(values=af_categorical_colours) +
-  scale_y_continuous(breaks = continents_population_labels$pos,
-                     labels = continents_population$Label) +
-  theme(axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        axis.text = element_text(size = 15), 
-        legend.position = "none", # Removes the legend
-        panel.background = element_rect(fill = "white"))
+pie(continents_population$Population, labels = continents_population$Label, 
+    border="white", col=af_categorical_colours, radius = 1.05)
 
 ```
 
@@ -558,7 +546,6 @@ ggplot(continents_population, aes(x = "", y = Population, fill = Continent)) +
 # Load your packages
 library(tidyverse)
 library(ggplot2)
-library(ggrepel)
 
 # Load in your colours
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
@@ -571,27 +558,12 @@ continents_population <- world_population %>%
   group_by(Continent) %>%
   summarise(Population = sum(.data$"2022")) %>%
   mutate(Label = paste(Continent, 
-                       paste(round(((Population/sum(Population))*100), 2), "%"), 
+                       paste0(round(Population/sum(Population)*100, 2), "%"), 
                        sep=" "))
 
-# Get the positions of the labels
-continents_population_labels <- continents_population %>% 
-  mutate(csum = rev(cumsum(rev(Population))), 
-         pos = Population/2 + lead(csum, 1),
-         pos = if_else(is.na(pos), Population/2, pos))
-
 # Create your chart
-ggplot(continents_population, aes(x = "", y = Population, fill = Continent)) +
-  geom_col(width=1, color="white") +
-  coord_polar(theta = "y") +
-  scale_fill_manual(values=af_categorical_colours) +
-  scale_y_continuous(breaks = continents_population_labels$pos,
-                     labels = continents_population$Label) +
-  theme(axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        axis.text = element_text(size = 15), 
-        legend.position = "none", # Removes the legend
-        panel.background = element_rect(fill = "white"))
+pie(continents_population$Population, labels = continents_population$Label, 
+    border="white", col=af_categorical_colours, radius = 1.05)
 
 ```
 

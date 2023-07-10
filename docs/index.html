@@ -119,15 +119,12 @@ table, th, td {
 <li><ol start="18" type="A">
 <li></li>
 </ol></li>
-<li>the <a href="https://github.com/best-practice-and-impact/afcolours">afcolours package</a>.</li>
+<li>The <a href="https://github.com/best-practice-and-impact/afcolours">afcolours package</a>.</li>
 </ol>
 </section>
 <section id="installing-afcolours" class="level2">
 <h2 class="anchored" data-anchor-id="installing-afcolours">Installing afcolours<a name="installingafcolours"></a></h2>
-<ol type="1">
-<li>Install the “devtools” package</li>
-<li>Run:</li>
-</ol>
+<p>This package is not currently on artifactory, so to install the latest version of afcolours directly from the github page, run:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"best-practice-and-impact/afcolours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-stderr">
@@ -135,7 +132,7 @@ table, th, td {
   Use `force = TRUE` to force installation</code></pre>
 </div>
 </div>
-<p>This process may change when afcolours goes live on artifactory.</p>
+<p>This requires you to have the “devtools” package installed first.</p>
 </section>
 <section id="how-to-obtain-colours" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-obtain-colours">How to obtain colours<a name="howtoobtain"></a></h2>
@@ -145,22 +142,21 @@ table, th, td {
 </div>
 <p>The afcolours function takes three arguments: palette, colour_format, and n.</p>
 <ul>
-<li><p>palette is a required parameter, chosen by the user based on the <a href="https://analysisfunction.civilservice.gov.uk/policy-store/codes-for-accessible-colours/#section-5">Analysis Function colour guidance</a>. It takes one of four possible string values corresponding to the options:</p>
+<li>palette is an optional parameter, chosen by the user based on the <a href="https://analysisfunction.civilservice.gov.uk/policy-store/codes-for-accessible-colours/#section-5">Analysis Function colour guidance</a>. It takes one of four possible string values corresponding to the options:
 <ul>
+<li>“categorical” (default)</li>
 <li>“duo”<br>
 </li>
 <li>“focus”<br>
 </li>
-<li>“sequential”<br>
-</li>
-<li>“categorical”</li>
+<li>“sequential”</li>
 </ul></li>
-<li><p>colour_format is an optional parameter. It takes one of two possible string values:</p>
+<li>colour_format is an optional parameter. It takes one of two possible string values:
 <ul>
 <li>“hex” (default); meaning hexadecimal colour code, for example #12436D.</li>
 <li>“rgb”; meaning red green blue colour code, for example (18, 67, 109).</li>
 </ul></li>
-<li><p>n is an optional parameter for the categorical palette. It takes an integer value up to 6 and by default is equal to 6.</p></li>
+<li>n is an optional parameter for the categorical palette. It takes an integer value up to 6 (default n=6).</li>
 </ul>
 <p>afcolours returns hex codes as a vector, and rgb codes as a matrix.</p>
 </section>
@@ -355,9 +351,11 @@ Grey
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>                       <span class="at">size =</span> highlight)) <span class="sc">+</span></span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Population (Billion)"</span>) <span class="sc">+</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span>af_focus_colours) <span class="sc">+</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">0.2</span>)) <span class="sc">+</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ipsum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span>af_focus_colours,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                      <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="fl">1.1</span>, <span class="fl">0.6</span>),</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name=</span><span class="st">"Country"</span>) <span class="sc">+</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ipsum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </section>
@@ -554,7 +552,7 @@ Light purple
 </tr>
 </tbody></table>
 <p><br></p>
-<p>The following charts use data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. Data is available with the af_colours package.</p>
+<p>The following charts use data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. Data is available with the afcolours package.</p>
 <section id="figure-4-bar-chart-using-the-categorical-colour-palette" class="level4">
 <h4 class="anchored" data-anchor-id="figure-4-bar-chart-using-the-categorical-colour-palette">Figure 4: Bar chart using the Categorical colour palette</h4>
 <div class="cell">
@@ -601,40 +599,24 @@ Light purple
 <div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your packages</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in your colours</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>af_categorical_colours <span class="ot">&lt;-</span> afcolours<span class="sc">::</span><span class="fu">af_colours</span>(<span class="st">"categorical"</span>, <span class="at">colour_format =</span> <span class="st">"hex"</span>, <span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in your data</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>world_population <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/world_population_continents.csv"</span>)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>continents_population <span class="ot">&lt;-</span> world_population <span class="sc">%&gt;%</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Continent, <span class="st">"2022"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent) <span class="sc">%&gt;%</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Population =</span> <span class="fu">sum</span>(.data<span class="sc">$</span><span class="st">"2022"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Label =</span> <span class="fu">paste</span>(Continent, </span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">paste</span>(<span class="fu">round</span>(((Population<span class="sc">/</span><span class="fu">sum</span>(Population))<span class="sc">*</span><span class="dv">100</span>), <span class="dv">2</span>), <span class="st">"%"</span>), </span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sep=</span><span class="st">" "</span>))</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the positions of the labels</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>continents_population_labels <span class="ot">&lt;-</span> continents_population <span class="sc">%&gt;%</span> </span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">csum =</span> <span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(Population))), </span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">pos =</span> Population<span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">lead</span>(csum, <span class="dv">1</span>),</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">pos =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(pos), Population<span class="sc">/</span><span class="dv">2</span>, pos))</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Create your chart</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(continents_population, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> Population, <span class="at">fill =</span> Continent)) <span class="sc">+</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>af_categorical_colours) <span class="sc">+</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> continents_population_labels<span class="sc">$</span>pos,</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> continents_population<span class="sc">$</span>Label) <span class="sc">+</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>), </span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="co"># Removes the legend</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in your colours</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>af_categorical_colours <span class="ot">&lt;-</span> afcolours<span class="sc">::</span><span class="fu">af_colours</span>(<span class="st">"categorical"</span>, <span class="at">colour_format =</span> <span class="st">"hex"</span>, <span class="at">n =</span> <span class="dv">6</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in your data</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>world_population <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/world_population_continents.csv"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>continents_population <span class="ot">&lt;-</span> world_population <span class="sc">%&gt;%</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Continent, <span class="st">"2022"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Continent) <span class="sc">%&gt;%</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Population =</span> <span class="fu">sum</span>(.data<span class="sc">$</span><span class="st">"2022"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Label =</span> <span class="fu">paste</span>(Continent, </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">paste0</span>(<span class="fu">round</span>(Population<span class="sc">/</span><span class="fu">sum</span>(Population)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">2</span>), <span class="st">"%"</span>), </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sep=</span><span class="st">" "</span>))</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create your chart</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(continents_population<span class="sc">$</span>Population, <span class="at">labels =</span> continents_population<span class="sc">$</span>Label, </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">border=</span><span class="st">"white"</span>, <span class="at">col=</span>af_categorical_colours, <span class="at">radius =</span> <span class="fl">1.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </section>
