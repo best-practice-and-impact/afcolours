@@ -15,9 +15,7 @@
 #'   dplyr
 #' @export
 #' @keywords colours
-#' @example   ggplot(aes(x = x, y = y, colour = z)) +
-#'            geom_point() +
-#'            scale_colour_manual(values = af_colours("duo"))
+#' @example ggplot(aes(x = x, y = y, colour = z)) + geom_point() + scale_colour_manual(values = af_colours("duo"))
 
 af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"), colour_format = "hex", n = 6) {
 
