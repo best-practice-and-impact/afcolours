@@ -57,7 +57,7 @@ The afcolours function takes three arguments: palette, colour_format,
 and n.
 
 - palette is an optional parameter, chosen by the user based on the 
-[Analysis Function colour guidance](https://analysisfunction.civilservice.gov.uk/policy-store/codes-for-accessible-colours/#section-5).
+[Analysis Function colour guidance](https://analysisfunction.civilservice.gov.uk/policy-store/codes-for-accessible-colours/).
 It takes one of four possible string values corresponding to the options:
     - "categorical" (default)
     - "duo"  
@@ -72,7 +72,7 @@ It takes one of four possible string values corresponding to the options:
 
 afcolours returns hex codes as a vector, and rgb codes as a matrix.
 
-## Basic Examples
+## Basic examples
 
 For example, to return the duo colour palette hex codes:
 ```{R}
@@ -89,8 +89,7 @@ afcolours::af_colours("categorical", "rgb", 5)
 
 <br>
 
-See also that a warning is given for colours lists greater than four to let the user know that accessibility problems can arise if the 
-palette is not applied correctly.
+See also that a warning is given for colours lists greater than four to let the user know that for best practice, it is preferable to use a limit of four categories
 
 
 ## Application<a name="application"></a>
@@ -128,7 +127,7 @@ palette is not applied correctly.
 #Load your packages
 library(tidyverse)
 library(ggplot2)
-library(hrbrthemes)
+library(ggrepel)
 
 # Load in your colours
 af_duo_colours <- afcolours::af_colours("duo")
@@ -145,15 +144,28 @@ ggplot(two_series_data, aes(x = Year, y = Population,
                             colour = Country,
                             group = Country)) +
   geom_line(size=1.1) +
-  labs(x="Year", y="Population (Billion)") +
-  scale_colour_manual(values=af_duo_colours) +
-  theme_ipsum()
+  scale_colour_manual(values=af_duo_colours, name=element_blank()) +
+  labs(x = "", y = "Population\n(Billion)") +
+  theme_classic(14) +
+  coord_cartesian(expand = FALSE, clip = 'off') +
+  theme(axis.title.y = element_text(angle = 0), 
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line("light grey"),
+        plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"), 
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(), 
+        panel.background = element_blank()
+        ) +
+  scale_y_continuous(limits=c(0,1.5), n.breaks = 6)
 
 ```
 
 <br>
 
-This line chart uses data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>.
+This line chart has two lines, one dark blue and one orange. This line chart uses data based on
+the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>.
 Data is available with the afcolours package.
 
 ```{R}
@@ -162,7 +174,7 @@ Data is available with the afcolours package.
 #Load your packages
 library(tidyverse)
 library(ggplot2)
-library(hrbrthemes)
+library(ggrepel)
 
 # Load in your colours
 af_duo_colours <- afcolours::af_colours("duo")
@@ -179,9 +191,21 @@ ggplot(two_series_data, aes(x = Year, y = Population,
                             colour = Country,
                             group = Country)) +
   geom_line(size=1.1) +
-  labs(x="Year", y="Population (Billion)") +
-  scale_colour_manual(values=af_duo_colours) +
-  theme_ipsum()
+  scale_colour_manual(values=af_duo_colours, name=element_blank()) +
+  labs(x = "", y = "Population\n(Billion)") +
+  theme_classic(14) +
+  coord_cartesian(expand = FALSE, clip = 'off') +
+  theme(axis.title.y = element_text(angle = 0), 
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line("light grey"),
+        plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"), 
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(), 
+        panel.background = element_blank()
+        ) +
+  scale_y_continuous(limits=c(0,1.5), n.breaks = 6) 
 
 ```
 
@@ -240,20 +264,29 @@ ggplot(focus_data, aes(x = Year, y = Population,
                        group = Country,
                        colour = highlight,
                        size = highlight)) +
-  geom_line() +
-  labs(x="Year", y="Population (Billion)") +
-  scale_colour_manual(values=af_focus_colours,
-                      guide="none") +
-  scale_size_manual(values=c(1.1, 0.6),
-                    name="Country") +
-  theme_ipsum()
+  geom_line(size=1) +
+  labs(x="Year", y="Population\n(Billion)") +
+  scale_colour_manual(values=af_focus_colours, name=element_blank()) +
+  theme_classic(14) +
+  coord_cartesian(expand = FALSE, clip = 'off') +
+  theme(axis.title.y = element_text(angle = 0), 
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line("light grey"),
+        plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"), 
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(), 
+        panel.background = element_blank()
+        ) +
+  scale_y_continuous(limits=c(0,1.5), n.breaks = 6)
 
 ```
 
 <br>
 
 This line chart uses data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. 
-Data is available with the afcolours package.
+All lines are light grey, except the line showing the time series for India. Data is available with the afcolours package.
 
 ```{R}
 #| eval: false
@@ -279,13 +312,22 @@ ggplot(focus_data, aes(x = Year, y = Population,
                        group = Country,
                        colour = highlight,
                        size = highlight)) +
-  geom_line() +
-  labs(x="Year", y="Population (Billion)") +
-  scale_colour_manual(values=af_focus_colours,
-                      guide="none") +
-  scale_size_manual(values=c(1.1, 0.6),
-                    name="Country") +
-  theme_ipsum()
+  geom_line(size=1) +
+  labs(x="Year", y="Population\n(Billion)") +
+  scale_colour_manual(values=af_focus_colours, name=element_blank()) +
+  theme_classic(14) +
+  coord_cartesian(expand = FALSE, clip = 'off') +
+  theme(axis.title.y = element_text(angle = 0), 
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line("light grey"),
+        plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"), 
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(), 
+        panel.background = element_blank()
+        ) +
+  scale_y_continuous(limits=c(0,1.5), n.breaks = 6)
 
 ```
 
@@ -348,18 +390,26 @@ top_five_age <- world_population_by_age[1:5,] %>%
 ggplot(top_five_age, aes(x = Country, y = Population, fill = Age)) +
   geom_col(width=0.6, position=position_dodge(0.7), stat="identity",
            colour=rgb(af_sequential_colours, maxColorValue = 255)[1]) +
-  labs(x="", y="Population (Billion)") +
-  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255)) +
-  theme_ipsum()
-
+  labs(x="", y="Population\n(Billion)") +
+  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255),
+                    name=element_blank()
+                    ) +
+  scale_y_continuous(limits=c(0,1), n.breaks = 6) +
+  theme_classic(14) +
+  theme(axis.title.y = element_text(angle = 0), 
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line(FALSE)
+        )
 ```
 
 <br>
 
-This bar chart uses data based on the <a href="https://www.kaggle.com/datasets/elmoallistair/population-by-age-group-2021">population by age dataset</a>.
-Data is available with the afcolours package.
+This clustered bar chart uses data based on the <a href="https://www.kaggle.com/datasets/elmoallistair/population-by-age-group-2021">population by age dataset</a> and 
+shows data for five countries. The legend is presented in the same order as the bars in the clusters. Data is available with the afcolours package.
 
-Distinct from previous examples, this section features how to use the rgb list returned by afcolours. It is generally easier to use hex codes, 
+Distinct from previous examples, this section features how to use the rgb list returned by af_colours. It is generally easier to use hex codes, 
 but this example is included for completeness. The end result is the same.
 
 The spacing in this example is to account for the bar borders, which are required for accessibility purposes.
@@ -385,9 +435,17 @@ top_five_age <- world_population_by_age[1:5,] %>%
 ggplot(top_five_age, aes(x = Country, y = Population, fill = Age)) +
   geom_col(width=0.6, position=position_dodge(0.7), stat="identity",
            colour=rgb(af_sequential_colours, maxColorValue = 255)[1]) +
-  labs(x="", y="Population (Billion)") +
-  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255)) +
-  theme_ipsum()
+  labs(x="", y="Population\n(Billion)") +
+  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255),
+                    name=element_blank()
+                    ) +  scale_y_continuous(limits=c(0,1), n.breaks = 6) +
+  theme_classic(14) +
+  theme(axis.title.y = element_text(angle = 0), 
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line(FALSE)
+        )
 
 ```
 
@@ -443,7 +501,7 @@ ggplot(top_five_age, aes(x = Country, y = Population, fill = Age)) +
 <br>
 
 The following charts use data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. 
-Data is available with the afcolours package.
+Data is available with the af_colours package.
 
 #### Figure 4: Bar chart using the Categorical colour palette
 
@@ -472,19 +530,21 @@ continents_population <- world_population %>%
 # Create your chart
 ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
   geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
-  labs(x="Year", y="Population (Billion)") +
-  scale_fill_manual(values=af_categorical_colours) +
-  theme_ipsum()
-
+  labs(x="", y="Population\n(Billion)") +
+  scale_fill_manual(values = af_categorical_colours, name = "") +
+  ylim(0, 4) +
+  theme_classic(14) +
+  theme(axis.title.y = element_text(angle = 0),
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line(FALSE)
+        )
+  
 ```
 
 ```{R}
 #| eval: false
-
-# Load your packages
-library(tidyverse)
-library(ggplot2)
-library(hrbrthemes)
 
 # Load in your colours
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
@@ -502,9 +562,16 @@ continents_population <- world_population %>%
 # Create your chart
 ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
   geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
-  labs(x="Year", y="Population (Billion)") +
-  scale_fill_manual(values=af_categorical_colours) +
-  theme_ipsum()
+  labs(x="", y="Population\n(Billion)") +
+  scale_fill_manual(values = af_categorical_colours, name = "") +
+  ylim(0, 4) +
+  theme_classic(14) +
+  theme(axis.title.y = element_text(angle = 0),
+        panel.grid.major.y = element_line("light grey"), 
+        legend.position="top", 
+        axis.line = element_line(FALSE), 
+        axis.ticks = element_line(FALSE)
+        )
 
 ```
 
@@ -530,13 +597,14 @@ continents_population <- world_population %>%
   select(Continent, "2022") %>%
   group_by(Continent) %>%
   summarise(Population = sum(.data$"2022")) %>%
+  arrange(-Population) %>%
   mutate(Label = paste(Continent, 
                        paste0(round(Population/sum(Population)*100, 2), "%"), 
                        sep=" "))
 
 # Create your chart
 pie(continents_population$Population, labels = continents_population$Label, 
-    border="white", col=af_categorical_colours, radius = 1.05)
+    border="white", col=af_categorical_colours, radius = 1.05, clockwise = TRUE)
 
 ```
 
@@ -557,13 +625,14 @@ continents_population <- world_population %>%
   select(Continent, "2022") %>%
   group_by(Continent) %>%
   summarise(Population = sum(.data$"2022")) %>%
+  arrange(-Population) %>%
   mutate(Label = paste(Continent, 
                        paste0(round(Population/sum(Population)*100, 2), "%"), 
                        sep=" "))
 
 # Create your chart
 pie(continents_population$Population, labels = continents_population$Label, 
-    border="white", col=af_categorical_colours, radius = 1.05)
+    border="white", col=af_categorical_colours, radius = 1.05, clockwise = TRUE)
 
 ```
 

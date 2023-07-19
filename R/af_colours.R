@@ -33,16 +33,32 @@ af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"),
   }
 
 
-  if (palette == "categorical" && n > 6){
-    stop("The number of colours (n) must not be more than 6 for the categorical palette.")
-  }
+  if (palette == "categorical"){
 
-  if (palette == "categorical" && n <= 0){
-    stop("The number of colours (n) must be more than 0 for the categorical palette.")
-  }
+    if (n > 6){
+      stop("The number of colours (n) must not be more than 6 for the categorical palette.")
+    }
 
-  if (palette == "categorical" && n == 2){
-    palette  <- "duo"
+    if (n <= 0){
+      stop("The number of colours (n) must be more than 0 for the categorical palette.")
+    }
+
+    if (n > 4){
+      message("It is best practice to limit to four categories when using the categorical palette so the chart does not become too cluttered.")
+    }
+
+    if (n == 2){
+      palette  <- "duo"
+    }
+
+  } else if (palette == "sequential"){
+
+    message("This palette should only be used for sequential data and please ensure you give all bars a dark blue outline if you are creating a bar chart.")
+
+  } else if (palette == "focus"){
+
+    message("This palette should only be used to highlight specific elements to help users understand the information.")
+
   }
 
   p <- palette_picker(palette, tolower(colour_format))
@@ -56,10 +72,6 @@ af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"),
       message("Warning: list of colours returned may be different than the colours requested. Consult guidance to ensure correct palette chosen.")
     }
     n <- palette_length
-  }
-
-  if (n > 4){
-    message("Line charts using more than 4 colours may not be accessible to all users.")
   }
 
   head(p, n)
