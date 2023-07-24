@@ -518,21 +518,18 @@ library(hrbrthemes)
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
 
 # Load in your data
-world_population <- read_csv("data/world_population_continents.csv")
+world_population <- read_csv("data/world_population_in_billions.csv")
 
-continents_population <- world_population %>%
-  select(2:6) %>%
-  tidyr::gather(Year, Population, -Continent) %>%
-  group_by(Continent, Year) %>%
-  summarise_each(funs(sum)) %>%
-  mutate(Population = Population/10^9)
+top_four_data <- world_population[1:4,] %>% 
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country)
 
 # Create your chart
-ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
+ggplot(top_four_data, aes(x = Year, y = Population, fill = Country)) +
   geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
   labs(x="", y="Population\n(Billion)") +
   scale_fill_manual(values = af_categorical_colours, name = "") +
-  ylim(0, 4) +
+  ylim(0, 1.5) +
   theme_classic(14) +
   theme(axis.title.y = element_text(angle = 0),
         panel.grid.major.y = element_line("light grey"), 
@@ -546,25 +543,27 @@ ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
 ```{R}
 #| eval: false
 
+# Load your packages
+library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+
 # Load in your colours
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
 
 # Load in your data
-world_population <- read_csv("data/world_population_continents.csv")
+world_population <- read_csv("data/world_population_in_billions.csv")
 
-continents_population <- world_population %>%
-  select(2:6) %>%
-  tidyr::gather(Year, Population, -Continent) %>%
-  group_by(Continent, Year) %>%
-  summarise_each(funs(sum)) %>%
-  mutate(Population = Population/10^9)
+top_four_data <- world_population[1:4,] %>% 
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country)
 
 # Create your chart
-ggplot(continents_population, aes(x = Year, y = Population, fill = Continent)) +
+ggplot(top_four_data, aes(x = Year, y = Population, fill = Country)) +
   geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
   labs(x="", y="Population\n(Billion)") +
   scale_fill_manual(values = af_categorical_colours, name = "") +
-  ylim(0, 4) +
+  ylim(0, 1.5) +
   theme_classic(14) +
   theme(axis.title.y = element_text(angle = 0),
         panel.grid.major.y = element_line("light grey"), 
@@ -591,22 +590,25 @@ library(ggplot2)
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
 
 # Load in your data
-world_population <- read_csv("data/world_population_continents.csv")
+world_population <- read_csv("data/world_population_in_billions.csv")
 
-continents_population <- world_population %>%
-  select(Continent, "2022") %>%
-  group_by(Continent) %>%
-  summarise(Population = sum(.data$"2022")) %>%
+top_four_data <- world_population[1:4,] %>%
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country) %>%
+  filter(Year == max(Year)) %>%
   arrange(-Population) %>%
-  mutate(Label = paste(Continent, 
+  mutate(Label = paste(Country, 
                        paste0(round(Population/sum(Population)*100, 2), "%"), 
                        sep=" "))
 
 # Create your chart
-pie(continents_population$Population, labels = continents_population$Label, 
+pie(top_four_data$Population, labels = top_four_data$Label, 
     border="white", col=af_categorical_colours, radius = 1.05, clockwise = TRUE)
 
 ```
+
+This a pie chart showing the proportional populations of the four most
+populous countries, China, India, the United States, and Indonesia.
 
 ```{R}
 #| eval: false
@@ -619,19 +621,19 @@ library(ggplot2)
 af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "hex", n = 6)
 
 # Load in your data
-world_population <- read_csv("data/world_population_continents.csv")
+world_population <- read_csv("data/world_population_in_billions.csv")
 
-continents_population <- world_population %>%
-  select(Continent, "2022") %>%
-  group_by(Continent) %>%
-  summarise(Population = sum(.data$"2022")) %>%
+top_four_data <- world_population[1:4,] %>%
+  rename(Country = "Country/Territory") %>%
+  tidyr::gather(Year, Population, -Country) %>%
+  filter(Year == max(Year)) %>%
   arrange(-Population) %>%
-  mutate(Label = paste(Continent, 
+  mutate(Label = paste(Country, 
                        paste0(round(Population/sum(Population)*100, 2), "%"), 
                        sep=" "))
 
 # Create your chart
-pie(continents_population$Population, labels = continents_population$Label, 
+pie(top_four_data$Population, labels = top_four_data$Label, 
     border="white", col=af_categorical_colours, radius = 1.05, clockwise = TRUE)
 
 ```
