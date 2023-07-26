@@ -28,4 +28,13 @@ A vector of colour codes
 \description{
 Generate a colour palette based on the selected chart and colour_format type (hex/rgb).
 }
+\examples{
+data <- data.frame(x = c(1,2),
+                   y = c(1,2),
+                   z = c("a","b")
+        )
+ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, colour = z)) +
+ggplot2::geom_point() +
+ggplot2::scale_colour_manual(values = af_colours("duo"))
+}
 \keyword{colours}

@@ -5,7 +5,7 @@
 #'
 #' @returns vector of the required type of colour code  from the duo palette
 #'
-#' @example duo_colours(code = "hex")
+#' @examples afcolours:::duo_colours(code = "hex")
 
 duo_colours <- function(code = c("hex", "rgb")) {
 
@@ -15,7 +15,7 @@ duo_colours <- function(code = c("hex", "rgb")) {
 
     hex = c("#12436D", "#F46A25"),
 
-    rgb = t(col2rgb(hex))
+    rgb = t(grDevices::col2rgb(hex))
 
     )
 

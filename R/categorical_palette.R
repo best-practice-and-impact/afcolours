@@ -5,7 +5,7 @@
 #'
 #' @returns vector of the required type of colour code  from the categorical palette
 #'
-#' @example categorical_colours(code = "hex")
+#' @examples afcolours:::categorical_colours(code = "hex")
 
 categorical_colours <- function(code = c("hex", "rgb")) {
 
@@ -15,7 +15,7 @@ categorical_colours <- function(code = c("hex", "rgb")) {
 
     hex = c("#12436D", "#28A197", "#801650", "#F46A25", "#3D3D3D", "#A285D1"),
 
-    rgb = t(col2rgb(hex))
+    rgb = t(grDevices::col2rgb(hex))
 
     )
 

@@ -5,7 +5,7 @@
 #'
 #' @returns vector of the required type of colour code  from the focus palette
 #'
-#' @example focus_colours(code = "hex")
+#' @examples afcolours:::focus_colours(code = "hex")
 
  focus_colours <- function(code = c("hex", "rgb")) {
 
@@ -15,7 +15,7 @@
 
     hex = c("#12436D", "#BFBFBF"),
 
-    rgb = t(col2rgb(hex))
+    rgb = t(grDevices::col2rgb(hex))
 
     )
 

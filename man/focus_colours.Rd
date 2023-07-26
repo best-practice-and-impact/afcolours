@@ -16,3 +16,6 @@ vector of the required type of colour code  from the focus palette
 \description{
 List of colour codes in the 'focus' colour palette
 }
+\examples{
+afcolours:::focus_colours(code = "hex")
+}
