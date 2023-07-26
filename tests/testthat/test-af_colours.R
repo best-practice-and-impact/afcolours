@@ -3,7 +3,7 @@ test_that("user must choose an available palette option", {
 })
 
 test_that("user must choose an available colour format option", {
-  expect_error(af_colours("categorical", colour_format="test"), "test is not an available colour format option. Please select either 'hex', 'rgb', or 'names'.", fixed = TRUE)
+  expect_error(af_colours("categorical", colour_format="test"), "test is not an available colour format option. Please select either 'hex' or 'rgb'.", fixed = TRUE)
 })
 
 test_that("user must choose at maximum 6 colours for the categorical palette", {

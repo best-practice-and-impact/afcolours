@@ -28,8 +28,8 @@ af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"),
     }
   )
 
-  if (!(colour_format %in% c("hex", "rgb", "names"))){
-    stop(paste0(colour_format, " is not an available colour format option. Please select either 'hex', 'rgb', or 'names'."))
+  if (!(colour_format %in% c("hex", "rgb"))){
+    stop(paste0(colour_format, " is not an available colour format option. Please select either 'hex' or 'rgb'."))
   }
 
 
