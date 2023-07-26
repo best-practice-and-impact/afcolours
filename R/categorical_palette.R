@@ -3,7 +3,7 @@
 #' @param code type of colour code required. Choices are:
 #'   \code{hex}, \code{rgb}
 #'
-#' @return vector of the required type of colour code  from the categorical palette
+#' @returns vector of the required type of colour code  from the categorical palette
 #'
 #' @example categorical_colours(code = "hex")
 

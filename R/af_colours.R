@@ -10,7 +10,7 @@
 #'   If omitted, returns hex code
 #' @param n Number of colours to return for categorical palette type (max 6).
 #'   If omitted, uses all colours.
-#' @return A vector of colour codes
+#' @returns A vector of colour codes
 #' @import
 #'   dplyr
 #' @export

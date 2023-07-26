@@ -3,7 +3,7 @@
 #' @param code type of colour code required. Choices are:
 #'   \code{hex}, \code{rgb}
 #'
-#' @return vector of the required type of colour code  from the focus palette
+#' @returns vector of the required type of colour code  from the focus palette
 #'
 #' @example focus_colours(code = "hex")
 

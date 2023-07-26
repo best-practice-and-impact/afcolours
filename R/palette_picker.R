@@ -5,7 +5,7 @@
 #' @param type type of palette required (categorical, duo, sequential, focus)
 #' @param colour_format type of colour format required (hex, rgb), default is hex
 #'
-#' @return vector of the required type of colour code  from the required palette
+#' @returns vector of the required type of colour code  from the required palette
 #'
 #' @example palette_picker(type = "categorical", code = "rgb")
 
