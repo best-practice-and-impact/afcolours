@@ -16,3 +16,6 @@ vector of the required type of colour code  from the categorical palette
 \description{
 List of colour codes in the 'categorical' colour palette
 }
+\examples{
+afcolours:::categorical_colours(code = "hex")
+}

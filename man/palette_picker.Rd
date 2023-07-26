@@ -17,3 +17,6 @@ vector of the required type of colour code  from the required palette
 \description{
 Used in the af_colours function. Returns a vector of the required colour codes from the palette selected in the input "type"
 }
+\examples{
+afcolours:::palette_picker(type = "categorical", colour_format = "rgb")
+}

@@ -7,7 +7,7 @@
 #'
 #' @return vector of the required type of colour code  from the required palette
 #'
-#' @example palette_picker(type = "categorical", code = "rgb")
+#' @examples afcolours:::palette_picker(type = "categorical", colour_format = "rgb")
 
 
 palette_picker <- function(type, colour_format = "hex") {

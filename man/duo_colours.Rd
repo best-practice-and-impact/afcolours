@@ -16,3 +16,6 @@ vector of the required type of colour code  from the duo palette
 \description{
 List of colour codes in the 'duo' colour palette
 }
+\examples{
+afcolours:::duo_colours(code = "hex")
+}

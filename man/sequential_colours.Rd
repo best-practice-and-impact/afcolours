@@ -16,3 +16,6 @@ vector of the required type of colour code  from the sequential palette
 \description{
 List of colour codes in the 'sequential' colour palette
 }
+\examples{
+afcolours:::sequential_colours(code = "hex")
+}

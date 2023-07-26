@@ -5,7 +5,7 @@
 #'
 #' @return vector of the required type of colour code  from the sequential palette
 #'
-#' @example sequential_colours(code = "hex")
+#' @examples afcolours:::sequential_colours(code = "hex")
 
 sequential_colours <- function(code = c("hex", "rgb")) {
 
@@ -15,7 +15,7 @@ sequential_colours <- function(code = c("hex", "rgb")) {
 
     hex = c("#12436D", "#2073BC", "#6BACE6"),
 
-    rgb = t(col2rgb(hex))
+    rgb = t(grDevices::col2rgb(hex))
 
     )
 
