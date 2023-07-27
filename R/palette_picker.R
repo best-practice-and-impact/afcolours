@@ -12,20 +12,12 @@
 
 palette_picker <- function(type, colour_format = "hex") {
 
-  palette_list <- list(
+  palette <- palettes[[type]]
 
-    `categorical` = categorical_colours(colour_format),
+  if (colour_format == "rgb") {
+    palette <- t(grDevices::col2rgb(palette))
+  }
 
-    `duo` = duo_colours(colour_format),
-
-    `sequential` = sequential_colours(colour_format),
-
-    `focus` = focus_colours(colour_format)
-
-  )
-
-  palette_list[[type]]
+  return(palette)
 
 }
-
-
