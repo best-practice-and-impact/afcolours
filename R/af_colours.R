@@ -2,7 +2,7 @@
 #'
 #' Generate a colour palette based on the selected chart and colour_format type (hex/rgb).
 #'
-#' @param palette Name of required palette. Choices are:
+#' @param type Name of required palette. Choices are:
 #'   \code{categorical}, \code{duo},  \code{sequential},
 #'   \code{focus}
 #' @param colour_format Type of colour code to return. Choices are:
@@ -24,14 +24,14 @@
 #' ggplot2::geom_point() +
 #' ggplot2::scale_colour_manual(values = af_colours("duo"))
 
-af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"), colour_format = "hex", n = 6) {
+af_colours <- function(type = c("categorical", "duo", "sequential", "focus"), colour_format = "hex", n = 6) {
 
   tryCatch(
     expr = {
-      palette <- match.arg(palette)
+      type <- match.arg(type)
     },
     error = function(e){
-      stop(paste0(palette, " is not an available palette option. Please select either 'categorical', 'duo', 'sequential', or 'focus'."))
+      stop(paste0(type, " is not an available palette option. Please select either 'categorical', 'duo', 'sequential', or 'focus'."))
     }
   )
 
@@ -40,7 +40,7 @@ af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"),
   }
 
 
-  if (palette == "categorical"){
+  if (type == "categorical"){
 
     if (n > 6){
       stop("The number of colours (n) must not be more than 6 for the categorical palette.")
@@ -55,32 +55,34 @@ af_colours <- function(palette = c("categorical", "duo", "sequential", "focus"),
     }
 
     if (n == 2){
-      palette  <- "duo"
+      type  <- "duo"
     }
 
-  } else if (palette == "sequential"){
+  } else if (type == "sequential"){
 
     message("This palette should only be used for sequential data and please ensure you give all bars a dark blue outline if you are creating a bar chart.")
 
-  } else if (palette == "focus"){
+  } else if (type == "focus"){
 
     message("This palette should only be used to highlight specific elements to help users understand the information.")
 
   }
 
-  p <- palette_picker(palette, tolower(colour_format))
+  palette <- palette_types[[type]]
 
-  palette_length <- ifelse(colour_format == "hex",
-                           length(p),
-                           nrow(p))
+  palette_length <- length(palette)
 
-  if (palette != "categorical"){
+  if (colour_format == "rgb") {
+    palette <- t(grDevices::col2rgb(palette))
+  }
+
+  if (type != "categorical"){
     if (n != 6){
       message("Warning: list of colours returned may be different than the colours requested. Consult guidance to ensure correct palette chosen.")
     }
     n <- palette_length
   }
 
-  utils::head(p, n)
+  utils::head(palette, n)
 
 }
