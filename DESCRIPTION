@@ -1,18 +1,22 @@
 Package: afcolours
 Title: Government Analysis Function Recommended Accessible Colour Palette
 Version: 0.0.0.9000
-Authors@R: 
-    c(
-    person("Charlotte", "Rowley",, "Charlotte.Rowley@ons.gov.uk", role = c("aut", "cre")),
-    person("Luke", "Davies",, "Luke.Davies@ons.gov.uk", role = c("aut"))
-    )
-Description: Government Analysis Function recommended colours for use in charts on gov.uk to help meet accessibility guidance.
+Authors@R: c(
+    person("Charlotte", "Rowley", , "Charlotte.Rowley@ons.gov.uk", role = c("aut", "cre")),
+    person("Luke", "Davies", , "Luke.Davies@ons.gov.uk", role = "aut")
+  )
+Description: Government Analysis Function recommended colours for use in
+    charts on gov.uk to help meet accessibility guidance.
 License: MIT + file LICENSE
+Depends: 
+    R (>= 2.10)
+Imports: 
+    dplyr,
+    grDevices
+Suggests: 
+    ggplot2,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Imports: dplyr
-Suggests: 
-    testthat (>= 3.0.0),
-    ggplot2
-Config/testthat/edition: 3

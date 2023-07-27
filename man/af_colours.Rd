@@ -5,13 +5,13 @@
 \title{Analysis Function colour palette function}
 \usage{
 af_colours(
-  palette = c("categorical", "duo", "sequential", "focus"),
+  type = c("categorical", "duo", "sequential", "focus"),
   colour_format = "hex",
   n = 6
 )
 }
 \arguments{
-\item{palette}{Name of required palette. Choices are:
+\item{type}{Name of required palette. Choices are:
 \code{categorical}, \code{duo},  \code{sequential},
 \code{focus}}
 
