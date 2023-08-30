@@ -2,8 +2,8 @@ Package: afcolours
 Title: Government Analysis Function Recommended Accessible Colour Palette
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Charlotte", "Rowley", , "Charlotte.Rowley@ons.gov.uk", role = c("aut", "cre")),
-    person("Luke", "Davies", , "Luke.Davies@ons.gov.uk", role = "aut"),
+    person("Luke", "Davies", , "Luke.Davies@ons.gov.uk", role = c("aut", "cre")),
+    person("Charlotte", "Rowley", , "Charlotte.Rowley@ons.gov.uk", role = "aut""),
     person("The Office for National Statistics", role = "cph"))
 Description: Government Analysis Function recommended colours for use in
     charts on gov.uk to help meet accessibility guidance.
