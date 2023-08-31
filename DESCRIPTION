@@ -1,6 +1,6 @@
 Package: afcolours
 Title: Government Analysis Function Recommended Accessible Colour Palette
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: c(
     person("Luke", "Davies", , "Luke.Davies@ons.gov.uk", role = c("aut", "cre")),
     person("Charlotte", "Rowley", , "Charlotte.Rowley@ons.gov.uk", role = "aut"),
