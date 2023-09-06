@@ -5,3 +5,6 @@
 ^data-raw$
 ^CRAN-SUBMISSION$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
