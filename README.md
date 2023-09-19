@@ -8,11 +8,10 @@ afcolours can be used to return either hex or rgb codes using the `colour_format
 
 ## Installation
 
-You can install the development version of afcolours from [GitHub](https://github.com/) with:
+To install the latest version of afcolours, run:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("best-practice-and-impact/afcolours")
+```{R}
+install.packages("afcolours")
 ```
 
 ## Example
