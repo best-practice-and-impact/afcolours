@@ -118,7 +118,7 @@ See also that a warning is given for colours lists greater than four to let the 
 ```{R}
 #| warning: false
 
-#Load your packages
+# Load your packages
 library(tidyverse)
 library(ggplot2)
 library(ggrepel)
@@ -129,32 +129,34 @@ af_duo_colours <- afcolours::af_colours("duo")
 # Load in your data
 world_population <- read_csv("data/world_population_in_billions.csv")
 
-two_series_data <- world_population[1:2,] %>% 
+two_series_data <- world_population[1:2, ] %>%
   rename(Country = "Country/Territory") %>%
   tidyr::gather(Year, Population, -Country) %>%
-  filter(Year %in% seq(1970, 2020, by=10))
+  filter(Year %in% seq(1970, 2020, by = 10))
 
 # Create your chart
-ggplot(two_series_data, aes(x = Year, y = Population,
-                            colour = Country,
-                            group = Country)) +
-  geom_line(size=1.1) +
-  scale_colour_manual(values=af_duo_colours, name=element_blank()) +
+ggplot(two_series_data, aes(
+  x = Year, y = Population,
+  colour = Country,
+  group = Country
+)) +
+  geom_line(size = 1.1) +
+  scale_colour_manual(values = af_duo_colours, name = element_blank()) +
   labs(x = "", y = "Population\n(Billion)") +
   theme_classic(14) +
-  coord_cartesian(expand = FALSE, clip = 'off') +
-  theme(axis.title.y = element_text(angle = 0), 
-        panel.grid.major.y = element_line("light grey"), 
-        legend.position="top", 
-        axis.line = element_line(FALSE), 
-        axis.ticks = element_line("light grey"),
-        plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"), 
-        panel.grid.minor = element_blank(),
-        panel.grid.major.x = element_blank(), 
-        panel.background = element_blank()
-        ) +
-  scale_y_continuous(limits=c(0,1.5), n.breaks = 6)
-
+  coord_cartesian(expand = FALSE, clip = "off") +
+  theme(
+    axis.title.y = element_text(angle = 0),
+    panel.grid.major.y = element_line("light grey"),
+    legend.position = "top",
+    axis.line = element_line(FALSE),
+    axis.ticks = element_line("light grey"),
+    plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.background = element_blank()
+  ) +
+  scale_y_continuous(limits = c(0, 1.5), n.breaks = 6)
 ```
 
 This line chart has two lines, one dark blue and one orange. This line chart uses data based on
@@ -205,34 +207,36 @@ af_focus_colours <- afcolours::af_colours("focus")
 # Load in your data
 world_population <- read_csv("data/world_population_in_billions.csv")
 
-focus_data <- world_population[1:5,] %>% 
+focus_data <- world_population[1:5, ] %>%
   rename(Country = "Country/Territory") %>%
   tidyr::gather(Year, Population, -Country) %>%
-  filter(Year %in% seq(1970, 2020, by=10)) %>%
+  filter(Year %in% seq(1970, 2020, by = 10)) %>%
   mutate(highlight = ifelse(Country == "India", "India", "Other"))
 
 # Create your chart
-ggplot(focus_data, aes(x = Year, y = Population,
-                       group = Country,
-                       colour = highlight,
-                       size = highlight)) +
-  geom_line(size=1) +
-  labs(x="Year", y="Population\n(Billion)") +
-  scale_colour_manual(values=af_focus_colours, name=element_blank()) +
+ggplot(focus_data, aes(
+  x = Year, y = Population,
+  group = Country,
+  colour = highlight,
+  size = highlight
+)) +
+  geom_line(size = 1) +
+  labs(x = "Year", y = "Population\n(Billion)") +
+  scale_colour_manual(values = af_focus_colours, name = element_blank()) +
   theme_classic(14) +
-  coord_cartesian(expand = FALSE, clip = 'off') +
-  theme(axis.title.y = element_text(angle = 0), 
-        panel.grid.major.y = element_line("light grey"), 
-        legend.position="top", 
-        axis.line = element_line(FALSE), 
-        axis.ticks = element_line("light grey"),
-        plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"), 
-        panel.grid.minor = element_blank(),
-        panel.grid.major.x = element_blank(), 
-        panel.background = element_blank()
-        ) +
-  scale_y_continuous(limits=c(0,1.5), n.breaks = 6)
-
+  coord_cartesian(expand = FALSE, clip = "off") +
+  theme(
+    axis.title.y = element_text(angle = 0),
+    panel.grid.major.y = element_line("light grey"),
+    legend.position = "top",
+    axis.line = element_line(FALSE),
+    axis.ticks = element_line("light grey"),
+    plot.margin = margin(0.5, 1.5, 0.1, 0.1, "cm"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.background = element_blank()
+  ) +
+  scale_y_continuous(limits = c(0, 1.5), n.breaks = 6)
 ```
 
 This line chart uses data based on the <a href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset?resource=download">world population dataset</a>. 
@@ -289,25 +293,29 @@ af_sequential_colours <- afcolours::af_colours("sequential", colour_format = "rg
 # Load in your data
 world_population_by_age <- read_csv("data/population_by_age.csv")
 
-top_five_age <- world_population_by_age[1:5,] %>% 
+top_five_age <- world_population_by_age[1:5, ] %>%
   tidyr::gather(Age, Population, -Country)
 
 # Create your chart
 ggplot(top_five_age, aes(x = Country, y = Population, fill = Age)) +
-  geom_col(width=0.6, position=position_dodge(0.7), stat="identity",
-           colour=rgb(af_sequential_colours, maxColorValue = 255)[1]) +
-  labs(x="", y="Population\n(Billion)") +
-  scale_fill_manual(values=rgb(af_sequential_colours, maxColorValue = 255),
-                    name=element_blank()
-                    ) +
-  scale_y_continuous(limits=c(0,1), n.breaks = 6) +
+  geom_col(
+    width = 0.6, position = position_dodge(0.7), stat = "identity",
+    colour = rgb(af_sequential_colours, maxColorValue = 255)[1]
+  ) +
+  labs(x = "", y = "Population\n(Billion)") +
+  scale_fill_manual(
+    values = rgb(af_sequential_colours, maxColorValue = 255),
+    name = element_blank()
+  ) +
+  scale_y_continuous(limits = c(0, 1), n.breaks = 6) +
   theme_classic(14) +
-  theme(axis.title.y = element_text(angle = 0), 
-        panel.grid.major.y = element_line("light grey"), 
-        legend.position="top", 
-        axis.line = element_line(FALSE), 
-        axis.ticks = element_line(FALSE)
-        )
+  theme(
+    axis.title.y = element_text(angle = 0),
+    panel.grid.major.y = element_line("light grey"),
+    legend.position = "top",
+    axis.line = element_line(FALSE),
+    axis.ticks = element_line(FALSE)
+  )
 ```
 
 This clustered bar chart uses data based on the <a href="https://www.kaggle.com/datasets/elmoallistair/population-by-age-group-2021">population by age dataset</a> and 
@@ -388,25 +396,25 @@ af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "
 # Load in your data
 world_population <- read_csv("data/world_population_in_billions.csv")
 
-top_four_data <- world_population[1:4,] %>% 
+top_four_data <- world_population[1:4, ] %>%
   rename(Country = "Country/Territory") %>%
   tidyr::gather(Year, Population, -Country) %>%
-  filter(Year %in% c(seq(1990, 2020, by=10)))
-  
+  filter(Year %in% c(seq(1990, 2020, by = 10)))
+
 # Create your chart
 ggplot(top_four_data, aes(x = Year, y = Population, fill = Country)) +
-  geom_col(width=0.6, position=position_dodge(0.7), stat="identity") +
-  labs(x="", y="Population\n(Billion)") +
+  geom_col(width = 0.6, position = position_dodge(0.7), stat = "identity") +
+  labs(x = "", y = "Population\n(Billion)") +
   scale_fill_manual(values = af_categorical_colours, name = "") +
   ylim(0, 1.5) +
   theme_classic(14) +
-  theme(axis.title.y = element_text(angle = 0),
-        panel.grid.major.y = element_line("light grey"), 
-        legend.position="top", 
-        axis.line = element_line(FALSE), 
-        axis.ticks = element_line(FALSE),
-        )
-  
+  theme(
+    axis.title.y = element_text(angle = 0),
+    panel.grid.major.y = element_line("light grey"),
+    legend.position = "top",
+    axis.line = element_line(FALSE),
+    axis.ticks = element_line(FALSE),
+  )
 ```
 
 <br>
@@ -426,19 +434,21 @@ af_categorical_colours <- afcolours::af_colours("categorical", colour_format = "
 # Load in your data
 world_population <- read_csv("data/world_population_in_billions.csv")
 
-top_four_data <- world_population[1:4,] %>%
+top_four_data <- world_population[1:4, ] %>%
   rename(Country = "Country/Territory") %>%
   tidyr::gather(Year, Population, -Country) %>%
   filter(Year == 2020) %>%
   arrange(-Population) %>%
-  mutate(Label = paste(Country, 
-                       paste0(round(Population/sum(Population)*100, 1), "%"), 
-                       sep=" "))
+  mutate(Label = paste(Country,
+    paste0(round(Population / sum(Population) * 100, 1), "%"),
+    sep = " "
+  ))
 
 # Create your chart
-pie(top_four_data$Population, labels = top_four_data$Label, 
-    border="white", col=af_categorical_colours, radius = 1.05, clockwise = TRUE)
-
+pie(top_four_data$Population,
+  labels = top_four_data$Label,
+  border = "white", col = af_categorical_colours, radius = 1.05, clockwise = TRUE
+)
 ```
 
 This a pie chart showing the proportional populations of the four most
