@@ -7,7 +7,8 @@
 af_colours(
   type = c("categorical", "duo", "sequential", "focus"),
   colour_format = "hex",
-  n = 6
+  n = 6,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ If omitted, returns hex code}
 
 \item{n}{Number of colours to return for categorical palette type (max 6).
 If omitted, uses all colours.}
+
+\item{verbose}{Option to stop function producing messages to the console.}
 }
 \value{
 A vector of colour codes
@@ -29,12 +32,13 @@ A vector of colour codes
 Generate a colour palette based on the selected chart and colour_format type (hex/rgb).
 }
 \examples{
-data <- data.frame(x = c(1,2),
-                   y = c(1,2),
-                   z = c("a","b")
-        )
+data <- data.frame(
+  x = c(1, 2),
+  y = c(1, 2),
+  z = c("a", "b")
+)
 ggplot2::ggplot(data, ggplot2::aes(x = x, y = y, colour = z)) +
-ggplot2::geom_point() +
-ggplot2::scale_colour_manual(values = af_colours("duo"))
+  ggplot2::geom_point() +
+  ggplot2::scale_colour_manual(values = af_colours("duo"))
 }
 \keyword{colours}
