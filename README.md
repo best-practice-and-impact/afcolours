@@ -1,4 +1,6 @@
 # afcolours
+## Depecation Notice
+Please note that afcolours has been superceded by [afcharts](https://github.com/best-practice-and-impact/afcharts), which expands on the functionality of afcolours, and automates the implementation of much of the Analysis Function accessibility guidance. As such, afcolours is no longer being supported.
 
 ## Overview
 
